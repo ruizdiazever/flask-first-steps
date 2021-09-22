@@ -1,8 +1,7 @@
-from flask import Flask, url_for, request
+from flask import Flask, url_for, request, render_template
 from markupsafe import escape
 
 app = Flask(__name__)
-
 
 
 # First examples
@@ -72,19 +71,32 @@ with app.test_request_context():
 
 # https://flask.palletsprojects.com/en/2.0.x/quickstart/#http-methods
 
-from flask import request
-
 def do_the_login():
     return "Test login"
 def show_the_login_form():
     return "Test form login"
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
+@app.route('/superlogin', methods=['GET', 'POST'])
+def superlogin():
     if request.method == 'POST':
         return do_the_login()
     else:
         return show_the_login_form()
+
+
+# Static files
+# https://flask.palletsprojects.com/en/2.0.x/quickstart/#static-files
+
+#url_for('static', filename='style.css')
+
+
+# https://flask.palletsprojects.com/en/2.0.x/quickstart/#rendering-templates
+@app.route('/helloRender/')
+@app.route('/helloRender/<name>')
+def helloRender(name=None):
+    return render_template('hello.html', name=name)
+
+
 
 if __name__ == '__main__':
     app.run()
