@@ -1,0 +1,4 @@
+flask
+sphinx
+pytest
+tox
